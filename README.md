@@ -81,7 +81,7 @@ See [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/
 
 ## Testing
 
-To run the tests (including the usage examples which are mirrored in the test suite), use [`wasm-pack`](https://rustwasm.github.io/wasm-pack/):
+To run the tests (including the usage examples which are mirrored in the test suite), use [`wasm-pack`](https://drager.github.io/wasm-pack/):
 
 ```bash
 # Run tests in Headless Firefox
