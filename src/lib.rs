@@ -7,7 +7,7 @@ extern crate alloc;
 use alloc::{ffi::CString, string::ToString};
 use core::{
     ffi::{CStr, c_char, c_int, c_void},
-    mem, ptr, slice,
+    ptr, slice,
 };
 
 use sqlite_wasm_rs::{
@@ -327,12 +327,20 @@ pub unsafe extern "C" fn sqlite3_uuid_init(
 
 /// Rust-friendly helper to register the extension.
 ///
+/// # Returns
+///
+/// * `c_int` - Result code from registering the extension.
+///
 /// # Safety
 ///
 /// This function is unsafe because it calls the unsafe `sqlite3_uuid_init`
-/// function, and dereferences raw pointers.
-pub unsafe fn register() -> c_int {
-    unsafe {
-        sqlite_wasm_rs::sqlite3_auto_extension(Some(mem::transmute(sqlite3_uuid_init as *const ())))
-    }
+/// function.
+/// 
+/// # Errors
+/// 
+/// * Returns `Ok(())` if the extension was registered successfully.
+/// * Returns `Err(c_int)` with the SQLite error code if registration failed. Learn more about SQLite error codes [here](https://www.sqlite.org/rescode.html).
+pub unsafe fn register() -> Result<(), c_int> {
+    let status = unsafe { sqlite_wasm_rs::sqlite3_auto_extension(Some(sqlite3_uuid_init)) };
+    if status == SQLITE_OK { Ok(()) } else { Err(status) }
 }

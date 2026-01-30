@@ -83,7 +83,7 @@ struct Post {
 fn test_uuid_with_diesel() {
     unsafe {
         // Register the UUID extension
-        sqlite_wasm_uuid_rs::register();
+        sqlite_wasm_uuid_rs::register().expect("Failed to register sqlite-wasm-uuid-rs");
     }
 
     let mut conn = SqliteConnection::establish(":memory:").unwrap();

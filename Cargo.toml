@@ -9,9 +9,6 @@ readme = "README.md"
 edition = "2024"
 license = "MIT"
 
-[workspace.package]
-edition = "2024"
-
 [dependencies]
 sqlite-wasm-rs = { version = "0.5.2" }
 wasm-bindgen = { version = "0.2.104", default-features = false }

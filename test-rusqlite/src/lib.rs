@@ -15,7 +15,7 @@ wasm_bindgen_test::wasm_bindgen_test_configure!(run_in_browser);
 #[wasm_bindgen_test]
 fn test_uuid_via_rusqlite() {
     unsafe {
-        sqlite_wasm_uuid_rs::register();
+        sqlite_wasm_uuid_rs::register().expect("Failed to register sqlite-wasm-uuid-rs");
     }
     let conn = Connection::open_in_memory().unwrap();
 

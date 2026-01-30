@@ -15,15 +15,26 @@ Rust SQLite-WASM extension for UUIDv4 (Random) & UUIDv7 (Time-ordered) generatio
 - `uuid7()`: Returns a new Version 7 UUID as a 36-character string.
 - `uuid7_blob()`: Returns a new Version 7 UUID as a 16-byte BLOB. If called with 1 argument, converts the input UUID (TEXT or BLOB format) to a 16-byte BLOB.
 
+For instance, you can now set the DEFAULT value of a TEXT column to `uuid()` and of a BLOB column to `uuid_blob()` to have UUIDs automatically generated upon insertion.
+
+```sql
+CREATE TABLE so_many_uuids (
+    id_text TEXT PRIMARY KEY DEFAULT (uuid()),
+    id_blob BLOB PRIMARY KEY DEFAULT (uuid_blob()),
+    idv7_text TEXT DEFAULT (uuid7()),
+    idv7_blob BLOB DEFAULT (uuid7_blob())
+);
+```
+
 ## Usage
 
 ### Rusqlite
 
-See [test-rusqlite/README.md](test-rusqlite/README.md) for a complete example of using this extension with `rusqlite`.
+See [test-rusqlite](./test-rusqlite) for a complete example of using this extension with `rusqlite`.
 
 ### Diesel
 
-See [test-diesel/README.md](test-diesel/README.md) for a complete example of using this extension with `diesel`.
+See [test-diesel](./test-diesel) for a complete example of using this extension with `diesel`.
 
 ## Testing
 
