@@ -47,11 +47,11 @@ unsafe {
 
 ### Rusqlite
 
-See [test-rusqlite](./test-rusqlite) for a complete example of using this extension with [`rusqlite`](https://crates.io/crates/rusqlite).
+See [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-rusqlite) for a complete example of using this extension with [`rusqlite`](https://crates.io/crates/rusqlite).
 
 ### Diesel
 
-See [test-diesel](./test-diesel) for a complete example of using this extension with [`diesel`](https://diesel.rs).
+See [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-diesel) for a complete example of using this extension with [`diesel`](https://diesel.rs).
 
 ## Testing
 
