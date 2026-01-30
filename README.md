@@ -39,6 +39,8 @@ sqlite-wasm-uuid-rs = "0.1"
 
 Then, depending on which library you are using to interface with SQLite-WASM, register the extension and use the functions as shown below. Please be mindful that the following examples are not executed as part of the CI tests because the different libraries have different sqlite dependencies which would conflict with each other. Instead, complete working examples are provided in the [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-rusqlite) and [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-diesel) directories.
 
+Do note that if you are using [`diesel`](https://docs.diesel.rs/2.3.x/diesel/index.html) and only need to use these functions inside a query, and not in schema definitions (e.g., as default values), you can avoid using this extension altogether by simply using [`declare_sql_function`](https://docs.diesel.rs/2.3.x/diesel/expression/functions/attr.declare_sql_function.html#use-with-sqlite) to map the Rust functions you need.
+
 ### Rusqlite
 
 ```rust,ignore
