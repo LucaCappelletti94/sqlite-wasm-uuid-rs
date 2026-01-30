@@ -30,28 +30,52 @@ CREATE TABLE so_many_uuids (
 
 ## Usage
 
-First, add the dependency to your `Cargo.toml`:
+Add the dependency to your `Cargo.toml`:
 
 ```toml
 [dependencies]
 sqlite-wasm-uuid-rs = "0.1"
 ```
 
-Then, register the extension with your SQLite database connection:
-
-```rust
-unsafe {
- sqlite_wasm_uuid_rs::register().expect("Failed to register sqlite-wasm-uuid-rs");
-}
-```
+Then, depending on which library you are using to interface with SQLite-WASM, register the extension and use the functions as shown below. Please be mindful that the following examples are not executed as part of the CI tests because the different libraries have different sqlite dependencies which would conflict with each other. Instead, complete working examples are provided in the [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-rusqlite) and [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-diesel) directories.
 
 ### Rusqlite
 
-See [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-rusqlite) for a complete example of using this extension with [`rusqlite`](https://crates.io/crates/rusqlite).
+```rust,ignore
+use rusqlite::Connection;
+
+// Register the extension (unsafe because it affects global SQLite state)
+unsafe {
+    sqlite_wasm_uuid_rs::register().expect("failed to register");
+}
+
+let conn = Connection::open_in_memory().unwrap();
+
+// Generate a random UUIDv4 string
+let uuid_str: String = conn.query_row("SELECT uuid()", [], |r| r.get(0)).unwrap();
+
+// Generate a random UUIDv4 blob
+let uuid_blob: Vec<u8> = conn.query_row("SELECT uuid_blob()", [], |r| r.get(0)).unwrap();
+```
+
+See [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-rusqlite) for a complete CI-tested example.
 
 ### Diesel
 
-See [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-diesel) for a complete example of using this extension with [`diesel`](https://diesel.rs).
+```rust,ignore
+// Register the extension
+unsafe {
+    sqlite_wasm_uuid_rs::register().expect("failed to register");
+}
+
+// Use raw SQL or `sql_query`
+diesel::sql_query("SELECT uuid()").execute(&mut conn)?;
+
+// Or use the functions in your schema definitions (requires custom SQL types)
+// See test-diesel for the full boilerplate setup.
+```
+
+See [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-diesel) for a complete CI-tested example.
 
 ## Testing
 
