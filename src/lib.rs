@@ -1,6 +1,7 @@
 #![doc = include_str!("../README.md")]
 #![no_std]
 #![allow(clippy::similar_names)]
+#![cfg(target_arch = "wasm32")]
 
 extern crate alloc;
 
