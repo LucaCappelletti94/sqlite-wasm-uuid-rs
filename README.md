@@ -2,8 +2,8 @@
 
 [![Crates.io](https://img.shields.io/crates/v/sqlite-wasm-uuid-rs.svg)](https://crates.io/crates/sqlite-wasm-uuid-rs)
 [![Docs.rs](https://docs.rs/sqlite-wasm-uuid-rs/badge.svg)](https://docs.rs/sqlite-wasm-uuid-rs)
-[![CI](https://github.com/lucac/sqlite-wasm-uuid-rs/workflows/Test/badge.svg)](https://github.com/lucac/sqlite-wasm-uuid-rs/actions)
-[![License](https://img.shields.io/crates/l/sqlite-wasm-uuid-rs.svg)](https://github.com/lucac/sqlite-wasm-uuid-rs/blob/master/LICENSE)
+[![CI](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/workflows/Test/badge.svg)](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/actions)
+[![License](https://img.shields.io/crates/l/sqlite-wasm-uuid-rs.svg)](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/blob/master/LICENSE)
 
 Rust [SQLite-WASM](https://sqlite.org/wasm) extension for [UUIDv4 (Random)](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)) & [UUIDv7 (Time-ordered)](https://uuid7.com/) generation.
 Powered by the [uuid](https://crates.io/crates/uuid) crate and built for [sqlite-wasm-rs](https://crates.io/crates/sqlite-wasm-rs).
