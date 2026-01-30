@@ -7,6 +7,7 @@
 
 Rust [SQLite-WASM](https://sqlite.org/wasm) extension for [UUIDv4 (Random)](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)) & [UUIDv7 (Time-ordered)](https://uuid7.com/) generation.
 Powered by the [uuid](https://crates.io/crates/uuid) crate and built for [sqlite-wasm-rs](https://crates.io/crates/sqlite-wasm-rs).
+The crate is [`no_std`](https://docs.rust-embedded.org/book/intro/no-std.html) and compiles to [`wasm32-unknown-unknown`](https://doc.rust-lang.org/rustc/platform-support/wasm32-unknown-unknown.html).
 
 ## SQL Functions
 
