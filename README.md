@@ -28,6 +28,21 @@ CREATE TABLE so_many_uuids (
 
 ## Usage
 
+First, add the dependency to your `Cargo.toml`:
+
+```toml
+[dependencies]
+sqlite-wasm-uuid-rs = "0.1"
+```
+
+Then, register the extension with your SQLite database connection:
+
+```rust
+unsafe {
+ sqlite_wasm_uuid_rs::register().expect("Failed to register sqlite-wasm-uuid-rs");
+}
+```
+
 ### Rusqlite
 
 See [test-rusqlite](./test-rusqlite) for a complete example of using this extension with `rusqlite`.

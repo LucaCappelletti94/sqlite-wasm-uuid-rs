@@ -48,7 +48,7 @@ fn test_uuid_via_rusqlite() {
 #[wasm_bindgen_test]
 fn test_uuid4_default() {
     unsafe {
-        sqlite_wasm_uuid_rs::register();
+        sqlite_wasm_uuid_rs::register().expect("Failed to register sqlite-wasm-uuid-rs");
     }
     let mut conn = Connection::open_in_memory().unwrap();
 
@@ -117,7 +117,7 @@ fn test_uuid4_default() {
 #[wasm_bindgen_test]
 fn test_uuid7_via_rusqlite() {
     unsafe {
-        sqlite_wasm_uuid_rs::register();
+        sqlite_wasm_uuid_rs::register().expect("Failed to register sqlite-wasm-uuid-rs");
     }
 
     let conn = Connection::open_in_memory().unwrap();
@@ -157,7 +157,7 @@ fn test_uuid7_via_rusqlite() {
 #[wasm_bindgen_test]
 fn test_uuid7_default() {
     unsafe {
-        sqlite_wasm_uuid_rs::register();
+        sqlite_wasm_uuid_rs::register().expect("Failed to register sqlite-wasm-uuid-rs");
     }
     let mut conn = Connection::open_in_memory().unwrap();
 

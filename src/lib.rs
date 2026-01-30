@@ -335,9 +335,9 @@ pub unsafe extern "C" fn sqlite3_uuid_init(
 ///
 /// This function is unsafe because it calls the unsafe `sqlite3_uuid_init`
 /// function.
-/// 
+///
 /// # Errors
-/// 
+///
 /// * Returns `Ok(())` if the extension was registered successfully.
 /// * Returns `Err(c_int)` with the SQLite error code if registration failed. Learn more about SQLite error codes [here](https://www.sqlite.org/rescode.html).
 pub unsafe fn register() -> Result<(), c_int> {
