@@ -5,7 +5,8 @@
 [![CI](https://github.com/lucac/sqlite-wasm-uuid-rs/workflows/Test/badge.svg)](https://github.com/lucac/sqlite-wasm-uuid-rs/actions)
 [![License](https://img.shields.io/crates/l/sqlite-wasm-uuid-rs.svg)](https://github.com/lucac/sqlite-wasm-uuid-rs/blob/master/LICENSE)
 
-Rust SQLite-WASM extension for UUIDv4 (Random) & UUIDv7 (Time-ordered) generation.
+Rust [SQLite-WASM](https://sqlite.org/wasm) extension for [UUIDv4 (Random)](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)) & [UUIDv7 (Time-ordered)](https://uuid7.com/) generation.
+Powered by the [uuid](https://crates.io/crates/uuid) crate and built for [sqlite-wasm-rs](https://crates.io/crates/sqlite-wasm-rs).
 
 ## SQL Functions
 
@@ -45,15 +46,15 @@ unsafe {
 
 ### Rusqlite
 
-See [test-rusqlite](./test-rusqlite) for a complete example of using this extension with `rusqlite`.
+See [test-rusqlite](./test-rusqlite) for a complete example of using this extension with [`rusqlite`](https://crates.io/crates/rusqlite).
 
 ### Diesel
 
-See [test-diesel](./test-diesel) for a complete example of using this extension with `diesel`.
+See [test-diesel](./test-diesel) for a complete example of using this extension with [`diesel`](https://diesel.rs).
 
 ## Testing
 
-To run the tests (including the usage examples which are mirrored in the test suite), use `wasm-pack`:
+To run the tests (including the usage examples which are mirrored in the test suite), use [`wasm-pack`](https://rustwasm.github.io/wasm-pack/):
 
 ```bash
 # Run tests in Headless Firefox
