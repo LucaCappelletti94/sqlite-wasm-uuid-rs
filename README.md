@@ -39,8 +39,6 @@ sqlite-wasm-uuid-rs = "0.1"
 
 Then, depending on which library you are using to interface with SQLite-WASM, register the extension and use the functions as shown below. Please be mindful that the following examples are not executed as part of the CI tests because the different libraries have different sqlite dependencies which would conflict with each other. Instead, complete working examples are provided in the [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/main/test-rusqlite) and [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/main/test-diesel) directories.
 
-Do note that if you are using [`diesel`](https://docs.diesel.rs/2.3.x/diesel/index.html) and only need to use these functions inside a query, and not in schema definitions (e.g., as default values), you can avoid using this extension altogether by simply using [`declare_sql_function`](https://docs.diesel.rs/2.3.x/diesel/expression/functions/attr.declare_sql_function.html#use-with-sqlite) to map the Rust functions you need.
-
 ### Rusqlite
 
 ```rust,ignore
@@ -64,6 +62,8 @@ See [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tre
 
 ### Diesel
 
+Do note that if you are using [`diesel`](https://docs.diesel.rs/2.3.x/diesel/index.html) you can avoid using this extension altogether by simply using [`declare_sql_function`](https://docs.diesel.rs/2.3.x/diesel/expression/functions/attr.declare_sql_function.html#use-with-sqlite) to map the Rust functions you need. Nevertheless, if you want to use the extension, here's how to do it:
+
 ```rust,ignore
 // Register the extension
 unsafe {
@@ -78,6 +78,43 @@ diesel::sql_query("SELECT uuid()").execute(&mut conn)?;
 ```
 
 See [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/main/test-diesel) for a complete CI-tested example.
+
+Here instead for completeness is how you could implement the UUID functions yourself in Diesel without using this extension:
+
+```rust,ignore
+#[declare_sql_function]
+extern "SQL" {
+    /// Generates a UUID v4
+    fn uuidv4() -> Binary;
+    /// Generates a UUID v7
+    fn uuidv7() -> Binary;
+}
+
+/// Returns a UUID v4 as a byte vector
+fn uuidv4_impl() -> Vec<u8> {
+    Uuid::new_v4().as_bytes().to_vec()
+}
+
+/// Returns a UUID v7 as a byte vector, using the UTC timestamp.
+fn uuidv7_impl() -> Vec<u8> {
+    let utc_now = chrono::Utc::now();
+    let seconds = utc_now.timestamp() as u64;
+    let subsec_nanos = utc_now.timestamp_subsec_nanos();
+    let counter = 0;
+    let usable_counter_bits = 12;
+    let timestamp =
+        uuid::Timestamp::from_unix_time(seconds, subsec_nanos, counter, usable_counter_bits);
+    Uuid::new_v7(timestamp).as_bytes().to_vec()
+}
+
+fn establish_connection() -> SqliteConnection {
+    let connection =
+        SqliteConnection::establish(":memory:").expect("Error connecting to in-memory SQLite");
+    uuidv4_utils::register_impl(&connection, uuidv4_impl).expect("Failed to register uuidv4");
+    uuidv7_utils::register_impl(&connection, uuidv7_impl).expect("Failed to register uuidv7");
+    connection
+}
+```
 
 ## Testing
 
