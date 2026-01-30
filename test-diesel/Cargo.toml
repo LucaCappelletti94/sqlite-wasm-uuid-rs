@@ -1,0 +1,20 @@
+[package]
+name = "test-diesel"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[workspace]
+
+[dependencies]
+sqlite-wasm-uuid-rs = { path = "../" }
+diesel = { version = "2.3.6", features = [
+	"sqlite",
+	"uuid",
+	"returning_clauses_for_sqlite_3_35",
+] }
+uuid = { version = "1.20.0" }
+wasm-bindgen-test = "0.3.54"
