@@ -3,7 +3,7 @@
 [![Crates.io](https://img.shields.io/crates/v/sqlite-wasm-uuid-rs.svg)](https://crates.io/crates/sqlite-wasm-uuid-rs)
 [![Docs.rs](https://docs.rs/sqlite-wasm-uuid-rs/badge.svg)](https://docs.rs/sqlite-wasm-uuid-rs)
 [![CI](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/workflows/Test/badge.svg)](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/actions)
-[![License](https://img.shields.io/crates/l/sqlite-wasm-uuid-rs.svg)](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/blob/master/LICENSE)
+[![License](https://img.shields.io/crates/l/sqlite-wasm-uuid-rs.svg)](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/blob/main/LICENSE)
 
 Rust [SQLite-WASM](https://sqlite.org/wasm) extension for [UUIDv4 (Random)](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)) & [UUIDv7 (Time-ordered)](https://uuid7.com/) generation.
 Powered by the [uuid](https://crates.io/crates/uuid) crate and built for [sqlite-wasm-rs](https://crates.io/crates/sqlite-wasm-rs).
@@ -37,7 +37,7 @@ Add the dependency to your `Cargo.toml`:
 sqlite-wasm-uuid-rs = "0.1"
 ```
 
-Then, depending on which library you are using to interface with SQLite-WASM, register the extension and use the functions as shown below. Please be mindful that the following examples are not executed as part of the CI tests because the different libraries have different sqlite dependencies which would conflict with each other. Instead, complete working examples are provided in the [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-rusqlite) and [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-diesel) directories.
+Then, depending on which library you are using to interface with SQLite-WASM, register the extension and use the functions as shown below. Please be mindful that the following examples are not executed as part of the CI tests because the different libraries have different sqlite dependencies which would conflict with each other. Instead, complete working examples are provided in the [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/main/test-rusqlite) and [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/main/test-diesel) directories.
 
 Do note that if you are using [`diesel`](https://docs.diesel.rs/2.3.x/diesel/index.html) and only need to use these functions inside a query, and not in schema definitions (e.g., as default values), you can avoid using this extension altogether by simply using [`declare_sql_function`](https://docs.diesel.rs/2.3.x/diesel/expression/functions/attr.declare_sql_function.html#use-with-sqlite) to map the Rust functions you need.
 
@@ -60,7 +60,7 @@ let uuid_str: String = conn.query_row("SELECT uuid()", [], |r| r.get(0)).unwrap(
 let uuid_blob: Vec<u8> = conn.query_row("SELECT uuid_blob()", [], |r| r.get(0)).unwrap();
 ```
 
-See [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-rusqlite) for a complete CI-tested example.
+See [test-rusqlite](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/main/test-rusqlite) for a complete CI-tested example.
 
 ### Diesel
 
@@ -77,7 +77,7 @@ diesel::sql_query("SELECT uuid()").execute(&mut conn)?;
 // See test-diesel for the full boilerplate setup.
 ```
 
-See [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/master/test-diesel) for a complete CI-tested example.
+See [test-diesel](https://github.com/LucaCappelletti94/sqlite-wasm-uuid-rs/tree/main/test-diesel) for a complete CI-tested example.
 
 ## Testing
 
