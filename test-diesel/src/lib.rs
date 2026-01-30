@@ -108,7 +108,6 @@ fn test_uuid_with_diesel() {
     diesel::insert_into(posts::table).values(&new_post).execute(&mut conn).unwrap();
 
     // Retrieve it back
-    // Filter expects T: AsExpression<SqliteUuid>. BlobUuid has it derived.
     let saved_post: Post =
         posts::table.filter(posts::id.eq(BlobUuid(my_uuid))).first(&mut conn).unwrap();
 
